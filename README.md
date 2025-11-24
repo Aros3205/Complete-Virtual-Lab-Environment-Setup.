@@ -131,7 +131,7 @@ I also experimented with Kali Linux and Metasploitable. These are **not fully do
 
 ### ⚙️ Example – Kali Disk / Boot Error
 
-When Kali could not boot, VirtualBox showed a “no bootable medium” type of message, and you corrected this by attaching the correct disk.
+When Kali could not boot, VirtualBox showed a “no bootable medium” type of message, so, I corrected this by attaching the correct disk.
 
 ![Kali Boot / Disk Issue](./Screenshot%20(23).png)
 
@@ -143,7 +143,7 @@ Also a brief intro to configuring a Metasploitable VM:
 
 ![Metasploitable VM Creation](./Screenshot%20(37).png)
 
-*(These sections can be expanded in a future README focused on offensive security testing.)*
+*(These sections will be expanded in a future README while I'll be  focusing on offensive security testing.)*
 
 ---
 
