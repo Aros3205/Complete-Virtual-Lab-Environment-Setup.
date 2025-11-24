@@ -102,13 +102,13 @@ The setup will continue copying files and installing the operating system.
 
 ---
 
-## 💻 4. Creating the First Windows 8.1 Client VM (`Windows_8_Wizard`)
+## 💻 4. Creating the First Windows 8.1 Client VM,
 
 ### Step 1 – Attach the Windows 8.1 ISO and configure the VM
 
 Click **New**, and in the wizard:
 
-1. Give the VM a name (`Windows_8_Wizard`).
+1. Give the VM a name E.g (`Windows_8_Wizard`).
 2. Select the **Windows 8.1** ISO.
 
 ![Attach Windows 8.1 ISO – first client](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(35).png)
