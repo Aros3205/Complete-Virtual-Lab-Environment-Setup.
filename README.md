@@ -14,7 +14,7 @@ Metasploitable 2
 After installing VirtualBox, launch the application.
 You should see the VirtualBox Manager interface:
 
-![VirtualBox Home](/mnt/data/Screenshot (1).png)
+![VirtualBox Home]/Screenshot (1).png)
 
 📌 2. Creating the Windows Server 2022 Virtual Machine
 
@@ -22,23 +22,23 @@ Start by clicking New.
 
 ➡️ Selecting VM Name, Folder, and ISO
 
-![Server ISO selection](/mnt/data/Screenshot (30).png)
+![Server ISO selection]/Screenshot (30).png)
 
 ➡️ Selecting the Server ISO
 
-![Server ISO selection 2](/mnt/data/Screenshot (29).png)
+![Server ISO selection 2]/Screenshot (29).png)
 
 ➡️ Virtual Hardware Settings (Memory, CPUs, etc.)
 
-![Hardware](/mnt/data/Screenshot (31).png)
+![Hardware]/Screenshot (31).png)
 
 ➡️ Creating Virtual Hard Disk (50 GB)
 
-![Disk](/mnt/data/Screenshot (32).png)
+![Disk]/Screenshot (32).png)
 
 ➡️ VM Resulting in VirtualBox List
 
-![Server created](/mnt/data/Screenshot (33).png)
+![Server created]/Screenshot (33).png)
 
 📌 3. Creating Windows 8.1 VM (First Client)
 
@@ -46,43 +46,43 @@ Click New, select ISO, and configure settings.
 
 ➡️ Selecting Windows 8 ISO
 
-![Win8 ISO](/mnt/data/Screenshot (34).png)
+![Win8 ISO]/Screenshot (34).png)
 
 ➡️ Automatic OS Detection
 
-![Win8 detected](/mnt/data/Screenshot (35).png)
+![Win8 detected]/Screenshot (35).png)
 
 ➡️ Windows 8 VM in List
 
-![Win8 created](/mnt/data/Screenshot (36).png)
+![Win8 created]/Screenshot (36).png)
 
 📌 4. Creating Kali Linux VM
 ➡️ Kali VM Creation Window
 
-![Kali creation](/mnt/data/Screenshot (23).png)
+![Kali creation]/Screenshot (23).png)
 
 ➡️ Selecting Existing Kali VDI Disk
 
-![Kali VDI selection](/mnt/data/Screenshot (24).png)
+![Kali VDI selection]/Screenshot (24).png)
 
 📌 5. Creating Metasploitable VM
 ➡️ Starting New Metasploitable VM
 
-![Metasploitable start](/mnt/data/Screenshot (37).png)
+![Metasploitable start]/Screenshot (37).png)
 
 ➡️ Hardware Setup
 
-![Metasploitable hardware](/mnt/data/Screenshot (36).png)
+![Metasploitable hardware]/Screenshot (36).png)
 
 ➡️ Selecting 8GB Disk
 
-![Metas disk](/mnt/data/Screenshot (37).png)
+![Metas disk]/Screenshot (37).png)
 
 📌 6. Example Boot Error (Kali Linux)
 
 You may see this error when booting if no ISO is attached:
 
-![Boot error](/mnt/data/Screenshot (23).png)
+![Boot error]/Screenshot (23).png)
 
 To fix:
 
