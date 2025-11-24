@@ -125,7 +125,7 @@ After installation completes then the Windows 8.1 Start screen / desktop.
 
 ---
 
-## 📌 6. Kali Linux & Metasploitable (Brief Mentions – Optional)
+## 📌 6. Kali Linux & Metasploitable (Brief Mentions )
 
 I also experimented with Kali Linux and Metasploitable. These are **not fully documented** here, but relevant screenshots exist and show partial setup.
 
