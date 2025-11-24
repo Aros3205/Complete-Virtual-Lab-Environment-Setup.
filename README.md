@@ -1,194 +1,294 @@
- This documentation walks through creating a multi-VM lab environment using **Oracle VirtualBox**, including:
+This project walks through how I built a **mini enterprise lab** on my local machine using **Oracle VirtualBox**, including:
 
-- **Windows Server 2022**
-- **Windows 8.1 Client VM #1**
-- **Windows 8.1 Client VM #2**
-- (Kali Linux & Metasploitable are mentioned briefly where screenshots exist)
+- 🖥️ **Windows Server 2022** (domain controller / core services)
+- 💻 **Two Windows 8.1 clients**  
+  - `Windows_8_Wizard`  
+  - `Wins_8_2`
+- 🐉 **Kali Linux** (attacker box)
+- 🎯 **Metasploitable 2** (intentionally vulnerable target)
 
-
-
----
-
-## 📌 1. VirtualBox Installed & Opened
-
-After installing VirtualBox, launch it. You should see the main VirtualBox Manager.
-
-![VirtualBox Home](./Screenshot%20(1).png)
+All VMs run on a single host using **Oracle VirtualBox**.
 
 ---
 
-## 📌 2. Creating the Windows Server 2022 Virtual Machine
+## 🧰 1. Prerequisites
 
-### ➡️ Step 1 – Click **New** and start the VM creation wizard
+- A machine with:
+  - Virtualization enabled in BIOS (Intel VT-x / AMD-V)
+  - At least **16 GB RAM** recommended  
+- Downloaded ISOs / images:
+  - Windows Server 2022 evaluation ISO
+  - Windows 8.1 ISO
+  - Kali Linux VirtualBox image (`.vdi`) or ISO
+  - Metasploitable 2 image (`.vmdk`)
+- ✅ Oracle VirtualBox installed
 
-Pick a name for the VM and then proceed to attach the ISO.
+After installing VirtualBox, open it and you should see the main manager window:
 
-![Server VM Wizard – Name & ISO](./Screenshot%20(29).png)
-
-### ➡️ Step 2 – Browse and select the Windows Server ISO
-
-![Server ISO Selection](./Screenshot%20(30).png)
-
-### ➡️ Step 3 – Configure RAM and CPU
-
-Allocate enough resources for the server (for example, 4 GB RAM and 2 vCPUs).
-
-![Server Hardware Settings](./Screenshot%20(31).png)
-
-### ➡️ Step 4 – Create a Virtual Hard Disk
-
-Choose to create a new VDI disk and assign around 50 GB.
-
-![Server Disk Configuration](./Screenshot%20(32).png)
-
-### ➡️ Step 5 – VM Successfully Created
-
-After finishing the wizard, the Windows Server VM appears in the list.
-
-![Server VM Created](./Screenshot%20(33).png)
+![VirtualBox Manager Home](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(1).png)
 
 ---
 
-## 📌 3. Installing Windows Server 2022
+## 📦 2. Creating the Windows Server 2022 Virtual Machine
 
-### ➡️ Step 1 – Start the Server VM
+### Step 1 – Start the VM creation wizard
 
-The VM boots from the ISO and you see the Windows setup screen.
+In VirtualBox, click **New** to create a new virtual machine.
 
-![Server Setup Start](./Screenshot%20(38).png)
+Select the **Server ISO** you downloaded:
 
-### ➡️ Step 2 – Windows Setup Language & Preferences
+![Select Server ISO file](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(29).png)
 
-![Language Selection](./Screenshot%20(39).png)
+VirtualBox auto-detects the OS information when you choose the ISO:
 
-### ➡️ Step 3 – Click **Install Now**
-
-![Install Now](./Screenshot%20(47).png)
-
-### ➡️ Step 4 – Accept the License Agreement
-
-![License Agreement](./Screenshot%20(48).png)
-
-
-
-
-
-## 📌 4. Creating Windows 8.1 Client VM #1
-
-### ➡️ Step 1 – Create a New VM and Select Windows 8.1 ISO
-
-Use the “New” button again and point to the Windows 8.1 ISO.
-
-![Windows 8.1 ISO Selection](./Screenshot%20(34).png)
-
-### ➡️ Step 2 – OS Auto-Detection
-
-VirtualBox detects the OS type and version based on the ISO.
-
-![Windows 8 OS Detected](./Screenshot%20(35).png)
-
-### ➡️ Step 3 – VM Appears in the List
-
-You have now successfully created your first Windows 8.1 VM,
-
-![Windows 8 VM Created](./Screenshot%20(36).png)
+![Server VM basic info](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(30).png)
 
 ---
 
-## 📌 5. Creating Windows 8.1 Client VM #2
+### Step 2 – Configure virtual hardware
 
-You need to  then repeat the process to create a second Windows 8.1 machine.
+Assign memory and CPU resources. Here I used:
 
-### ➡️ Step 1 – New VM Wizard for Second Win8 VM
+- **Base Memory**: 2048 MB (2 GB)  
+- **Processors**: 1 CPU (you can assign more if your host can handle it)
 
-![Second Win8 VM – Name & Settings](./Screenshot%20(51).png)
-
-### ➡️ Step 2 – Confirm Hardware & Disk Configuration
-
-![Second Win8 VM – Hardware & Disk](./Screenshot%20(52).png)
-
-### ➡️ Step 3 – Select Installation Drive in Setup
-
-During installation, choose the virtual disk where Windows 8.1 will be installed.
-
-![Drive Selection During Install](./Screenshot%20(53).png)
-
-*(You may also use `Screenshot (54).png` here for additional install progress.)*
-
-### ➡️ Step 4 – Windows 8.1 Successfully Installed
-
-After installation completes then the Windows 8.1 Start screen / desktop.
-
-![Windows 8.1 Start Screen](./Screenshot%20(55).png)
-
-![Windows 8.1 Desktop Running](./Screenshot%20(56).png)
+![Server VM hardware settings](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(31).png)
 
 ---
 
-## 📌 6. Kali Linux & Metasploitable (Brief Mentions )
+### Step 3 – Create the virtual hard disk
 
-I also experimented with Kali Linux and Metasploitable. These are **not fully documented** here, but relevant screenshots exist and show partial setup.
+Create a new virtual disk for the server:
 
-### ⚙️ Example – Kali Disk / Boot Error
+- **Disk Type**: VDI (VirtualBox Disk Image)
+- **Storage**: Dynamically allocated
+- **Size**: ~50 GB
 
-When Kali could not boot, VirtualBox showed a “no bootable medium” type of message, so, I corrected this by attaching the correct disk.
+![Server VM virtual disk setup](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(32).png)
 
-![Kali Boot / Disk Issue](./Screenshot%20(23).png)
+After completing the wizard, the new server VM appears in the list:
 
-![Kali VDI Selection](./Screenshot%20(24).png)
-
-### ⚙️ Example – Metasploitable Disk / VM Creation
-
-Also a brief intro to configuring a Metasploitable VM:
-
-![Metasploitable VM Creation](./Screenshot%20(37).png)
-
-*(These sections will be expanded in a future README while I'll be  focusing on offensive security testing.)*
+![Server VM in VirtualBox list](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(33).png)
 
 ---
 
-## 📌 7. Current Virtual Machine Summary
+## 🪟 3. Installing Windows Server 2022
 
-Your lab currently includes:
+Start the **Magic_Windows_Server_02** VM to boot from the ISO.
 
-- **Windows Server 2022 VM**  
-  Used as the basis for a future Domain Controller, DNS, and IAM configuration.
+### Step 1 – Language and keyboard selection
 
-- **Windows 8.1 Client #1 (Windows_8_Wizard)**  
-  A workstation to later join the domain and test Active Directory logins.
+![Server setup – language selection](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(48).png)
 
-- **Windows 8.1 Client #2 (Wins_8_2)**  
-  A second client for simulating multi-user/domain scenarios.
-
-- **Kali Linux (Partially setup)**  
-  Intended attacker machine for future penetration testing.
-
-- **Metasploitable 2 (Partially setup)**  
-  Intended vulnerable target VM for exploitation practice.
+Choose your language, time, and keyboard layout, then click **Next**.
 
 ---
 
-## 📌 8. Next Steps / Future Work
+### Step 2 – Begin installation
 
-You can extend this lab by:
+Click **Install now** to start the OS installation:
 
-- Promoting Windows Server to a **Domain Controller (AD DS)**  
-- Creating a **lab.local** (or similar) domain  
-- Joining both Windows 8.1 clients to the domain  
-- Configuring **Group Policy, IAM roles, and permissions**  
-- Using Kali to scan and test services (e.g. Nmap, Metasploit)  
-- Using Metasploitable as the vulnerable target  
-- Capturing lab traffic with **Wireshark**
+![Server setup – Install now](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(49).png)
+
+---
+
+### Step 3 – Accept license terms
+
+Check the box to accept the Microsoft Software License Terms and click **Next**:
+
+![Server setup – license agreement](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(50).png)
+
+The setup will continue copying files and installing the operating system.
+
+---
+
+## 💻 4. Creating the First Windows 8.1 Client VM (`Windows_8_Wizard`)
+
+### Step 1 – Attach the Windows 8.1 ISO and configure the VM
+
+Click **New**, and in the wizard:
+
+1. Give the VM a name (`Windows_8_Wizard`).
+2. Select the **Windows 8.1** ISO.
+
+![Attach Windows 8.1 ISO – first client](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(35).png)
+
+---
+
+### Step 2 – Configure RAM and CPU
+
+Assign RAM and CPU (example: 2048 MB RAM, 1 CPU):
+
+![Windows 8.1 client hardware – first VM](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(36).png)
+
+---
+
+### Step 3 – Create the virtual hard disk
+
+Create a new VDI disk for the first client:
+
+![Windows 8.1 client disk – first VM](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(37).png)
+
+After finishing, you should see `Windows_8_Wizard` in the VM list:
+
+![Windows_8_Wizard in VM list](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(34).png)
+
+---
+
+## 💻 5. Creating the Second Windows 8.1 Client VM (`Wins_8_2`)
+
+We now create a **second Windows 8.1 machine** to simulate another client in the same environment.
+
+### Step 1 – New VM wizard for `Wins_8_2`
+
+Click **New** and configure:
+
+- **VM Name**: `Wins_8_2`
+- **ISO Image**: Same Windows 8.1 ISO
+
+![New VM – Wins_8_2 basic settings](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(52).png)
+
+---
+
+### Step 2 – Configure hardware
+
+Set RAM and CPU for the second client:
+
+![Wins_8_2 hardware settings](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(53).png)
+
+---
+
+### Step 3 – Create virtual hard disk
+
+Create a new disk for `Wins_8_2` (example: 40 GB):
+
+![Wins_8_2 virtual disk settings](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(54).png)
+
+---
+
+### Step 4 – Verify second client VM
+
+After installation completes, you can see `Wins_8_2` running with the Windows 8 Start screen:
+
+![Wins_8_2 running – Start screen](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(55).png)
+
+---
+
+## 🐉 6. Setting Up Kali Linux
+
+For Kali, I used a **prebuilt VirtualBox disk (.vdi)**.
+
+### Step 1 – Kali VM creation and disk selection
+
+In the storage section, the Kali VDI is attached to the VM:
+
+![Kali Linux VM attached VDI](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(51).png)
+
+If the VM is missing an ISO or OS image at boot, you might see this error:
+
+![Kali VM boot error – no OS found](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(23).png)
+
+To fix this:
+
+1. Power off the VM.  
+2. Go to **Settings → Storage**.  
+3. Attach the proper Kali ISO/VDI to the controller.  
+4. Boot the VM again.
+
+---
+
+## 🎯 7. Creating the Metasploitable 2 VM
+
+Metasploitable is your **intentionally vulnerable** target machine.
+
+### Step 1 – Create the Metasploitable VM shell
+
+Click **New** and configure:
+
+- **VM Name**: `Metas_VM`
+- **Type**: Linux
+- **Version**: Other Linux (64-bit)
+
+![Metasploitable VM basic settings](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(36).png)
+
+---
+
+### Step 2 – Assign RAM
+
+![Metasploitable VM RAM/CPU](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(35).png)
+
+*(Values can be 512 MB – 1 GB depending on your host resources.)*
+
+---
+
+### Step 3 – Create or attach the virtual disk
+
+For Metasploitable, we use an **existing `.vmdk` disk image** (about 8 GB):
+
+![Metasploitable VM disk setup](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(38).png)
+
+Once the VM is created, it appears in the list powered off:
+
+![Metas_VM in VirtualBox list](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(39).png)
+
+You can also see the attached Metasploitable disk in the **medium selector**:
+
+![Metasploitable .vmdk attached](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(47).png)
+
+---
+
+## 🧩 8. Windows Server Installation Progress (Optional Visuals)
+
+During installation, the server goes through the usual setup phases. Here are some intermediate views for reference:
+
+![Server ISO selection – file dialog](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(24).png)
+
+![Server VM powering up / installing](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(39).png)
+
+---
+
+## 🧷 9. Current Lab Topology
+
+At this point, the VirtualBox Manager shows all the main lab VMs:
+
+- `Magic_Windows_Server_02` (Windows Server 2022)
+- `Windows_8_Wizard` (Windows 8.1 client #1)
+- `Wins_8_2` (Windows 8.1 client #2)
+- `Richard_Kali_Linux_...` (Kali Linux attacker machine)
+- `Metas_VM` (Metasploitable 2 target)
+
+Example manager view (with several VMs running):
+
+![VirtualBox Manager with multiple VMs](https://github.com/Aros3205/Complete-Virtual-Lab-Environment-Setup./raw/main/Screenshot%20(48).png)
+
+---
+
+## 🚀 10. Next Steps / Future Enhancements
+
+Now that the lab is built, you can extend it with:
+
+- **Active Directory** on Windows Server
+- **DNS and DHCP** roles
+- Join both Windows 8.1 machines to the domain
+- Use **Kali** to perform:
+  - Network scanning (nmap)
+  - Vulnerability scanning (e.g., OpenVAS, Metasploit aux modules)
+- Attack **Metasploitable 2** from Kali
+- Capture traffic with **Wireshark** for analysis
 
 ---
 
 ## ✅ Summary
 
-This repository documents the full **VirtualBox-based lab environment setup** using:
+This repo documents how I built a **complete home lab** using:
 
 - Oracle VirtualBox  
 - Windows Server 2022  
 - Two Windows 8.1 client machines  
-- Early steps toward a security testing lab
+- Kali Linux  
+- Metasploitable 2  
 
-All screenshots in this README are actual captures from the build process and are stored in this repo as `Screenshot (X).png`.
+Every major step is backed by screenshots taken directly from my setup process so others can follow along visually.
+
+> 💬 Feedback, issues, or suggestions?  
+> Open an **Issue** on this repo or reach out to me on LinkedIn.
