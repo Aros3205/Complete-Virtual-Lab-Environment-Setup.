@@ -1,125 +1,194 @@
-This documentation walks through the complete setup of a multi-VM cybersecurity lab environment using Oracle VirtualBox.
-It includes:
+ This documentation walks through creating a multi-VM lab environment using **Oracle VirtualBox**, including:
 
-Windows Server 2022
+- **Windows Server 2022**
+- **Windows 8.1 Client VM #1**
+- **Windows 8.1 Client VM #2**
+- (Kali Linux & Metasploitable are mentioned briefly where screenshots exist)
 
-Two Windows 8.1 clients
+All screenshots below are files stored in this repository (e.g. `Screenshot (1).png`, `Screenshot (30).png`, etc.).
 
-Kali Linux
+---
 
-Metasploitable 2
+## 📌 1. VirtualBox Installed & Opened
 
-📌 1. Installing & Opening Oracle VirtualBox
+After installing VirtualBox, launch it. You should see the main VirtualBox Manager.
 
-After installing VirtualBox, launch the application.
-You should see the VirtualBox Manager interface:
+![VirtualBox Home](./Screenshot%20(1).png)
 
-![VirtualBox Home]/Screenshot (1).png)
+---
 
-📌 2. Creating the Windows Server 2022 Virtual Machine
+## 📌 2. Creating the Windows Server 2022 Virtual Machine
 
-Start by clicking New.
+### ➡️ Step 1 – Click **New** and start the VM creation wizard
 
-➡️ Selecting VM Name, Folder, and ISO
+Pick a name for the VM and then proceed to attach the ISO.
 
-![Server ISO selection]/Screenshot (30).png)
+![Server VM Wizard – Name & ISO](./Screenshot%20(29).png)
 
-➡️ Selecting the Server ISO
+### ➡️ Step 2 – Browse and select the Windows Server ISO
 
-![Server ISO selection 2]/Screenshot (29).png)
+![Server ISO Selection](./Screenshot%20(30).png)
 
-➡️ Virtual Hardware Settings (Memory, CPUs, etc.)
+### ➡️ Step 3 – Configure RAM and CPU
 
-![Hardware]/Screenshot (31).png)
+Allocate enough resources for the server (for example, 4 GB RAM and 2 vCPUs).
 
-➡️ Creating Virtual Hard Disk (50 GB)
+![Server Hardware Settings](./Screenshot%20(31).png)
 
-![Disk]/Screenshot (32).png)
+### ➡️ Step 4 – Create a Virtual Hard Disk
 
-➡️ VM Resulting in VirtualBox List
+Choose to create a new VDI disk and assign around 50 GB.
 
-![Server created]/Screenshot (33).png)
+![Server Disk Configuration](./Screenshot%20(32).png)
 
-📌 3. Creating Windows 8.1 VM (First Client)
+### ➡️ Step 5 – VM Successfully Created
 
-Click New, select ISO, and configure settings.
+After finishing the wizard, the Windows Server VM appears in the list.
 
-➡️ Selecting Windows 8 ISO
+![Server VM Created](./Screenshot%20(33).png)
 
-![Win8 ISO]/Screenshot (34).png)
+---
 
-➡️ Automatic OS Detection
+## 📌 3. Installing Windows Server 2022
 
-![Win8 detected]/Screenshot (35).png)
+### ➡️ Step 1 – Start the Server VM
 
-➡️ Windows 8 VM in List
+The VM boots from the ISO and you see the Windows setup screen.
 
-![Win8 created]/Screenshot (36).png)
+![Server Setup Start](./Screenshot%20(38).png)
 
-📌 4. Creating Kali Linux VM
-➡️ Kali VM Creation Window
+### ➡️ Step 2 – Windows Setup Language & Preferences
 
-![Kali creation]/Screenshot (23).png)
+![Language Selection](./Screenshot%20(39).png)
 
-➡️ Selecting Existing Kali VDI Disk
+### ➡️ Step 3 – Click **Install Now**
 
-![Kali VDI selection]/Screenshot (24).png)
+![Install Now](./Screenshot%20(47).png)
 
-📌 5. Creating Metasploitable VM
-➡️ Starting New Metasploitable VM
+### ➡️ Step 4 – Accept the License Agreement
 
-![Metasploitable start]/Screenshot (37).png)
+![License Agreement](./Screenshot%20(48).png)
 
-➡️ Hardware Setup
 
-![Metasploitable hardware]/Screenshot (36).png)
 
-➡️ Selecting 8GB Disk
 
-![Metas disk]/Screenshot (37).png)
 
-📌 6. Example Boot Error (Kali Linux)
+## 📌 4. Creating Windows 8.1 Client VM #1
 
-You may see this error when booting if no ISO is attached:
+### ➡️ Step 1 – Create a New VM and Select Windows 8.1 ISO
 
-![Boot error]/Screenshot (23).png)
+Use the “New” button again and point to the Windows 8.1 ISO.
 
-To fix:
+![Windows 8.1 ISO Selection](./Screenshot%20(34).png)
 
-Go to Settings → Storage
+### ➡️ Step 2 – OS Auto-Detection
 
-Attach ISO under "Controller: IDE"
+VirtualBox detects the OS type and version based on the ISO.
 
-Boot again
+![Windows 8 OS Detected](./Screenshot%20(35).png)
 
-📌 7. Windows 8 Installation Screen
+### ➡️ Step 3 – VM Appears in the List
 
-When installing Windows:
+You have now successfully created your first Windows 8.1 VM,
 
-📌 8. Windows Server Login Screen After Installation
+![Windows 8 VM Created](./Screenshot%20(36).png)
 
-📌 9. Windows 8 Completed Setup
+---
 
-📌 10. Lab Summary
+## 📌 5. Creating Windows 8.1 Client VM #2
 
-Your Virtual Lab now includes:
+You need to  then repeat the process to create a second Windows 8.1 machine.
 
-VM	Purpose
-Windows Server 2022	Domain Controller, DNS, DHCP, AD
-Windows 8 Client #1	Domain-joined workstation
-Windows 8 Client #2	Additional client for testing
-Kali Linux	Attacker machine (penetration testing)
-Metasploitable 2	Vulnerable target for exploitation
-📌 11. Future Enhancements
+### ➡️ Step 1 – New VM Wizard for Second Win8 VM
+
+![Second Win8 VM – Name & Settings](./Screenshot%20(51).png)
+
+### ➡️ Step 2 – Confirm Hardware & Disk Configuration
+
+![Second Win8 VM – Hardware & Disk](./Screenshot%20(52).png)
+
+### ➡️ Step 3 – Select Installation Drive in Setup
+
+During installation, choose the virtual disk where Windows 8.1 will be installed.
+
+![Drive Selection During Install](./Screenshot%20(53).png)
+
+*(You may also use `Screenshot (54).png` here for additional install progress.)*
+
+### ➡️ Step 4 – Windows 8.1 Successfully Installed
+
+After installation completes then the Windows 8.1 Start screen / desktop.
+
+![Windows 8.1 Start Screen](./Screenshot%20(55).png)
+
+![Windows 8.1 Desktop Running](./Screenshot%20(56).png)
+
+---
+
+## 📌 6. Kali Linux & Metasploitable (Brief Mentions – Optional)
+
+I also experimented with Kali Linux and Metasploitable. These are **not fully documented** here, but relevant screenshots exist and show partial setup.
+
+### ⚙️ Example – Kali Disk / Boot Error
+
+When Kali could not boot, VirtualBox showed a “no bootable medium” type of message, and you corrected this by attaching the correct disk.
+
+![Kali Boot / Disk Issue](./Screenshot%20(23).png)
+
+![Kali VDI Selection](./Screenshot%20(24).png)
+
+### ⚙️ Example – Metasploitable Disk / VM Creation
+
+Also a brief intro to configuring a Metasploitable VM:
+
+![Metasploitable VM Creation](./Screenshot%20(37).png)
+
+*(These sections can be expanded in a future README focused on offensive security testing.)*
+
+---
+
+## 📌 7. Current Virtual Machine Summary
+
+Your lab currently includes:
+
+- **Windows Server 2022 VM**  
+  Used as the basis for a future Domain Controller, DNS, and IAM configuration.
+
+- **Windows 8.1 Client #1 (Windows_8_Wizard)**  
+  A workstation to later join the domain and test Active Directory logins.
+
+- **Windows 8.1 Client #2 (Wins_8_2)**  
+  A second client for simulating multi-user/domain scenarios.
+
+- **Kali Linux (Partially setup)**  
+  Intended attacker machine for future penetration testing.
+
+- **Metasploitable 2 (Partially setup)**  
+  Intended vulnerable target VM for exploitation practice.
+
+---
+
+## 📌 8. Next Steps / Future Work
 
 You can extend this lab by:
 
-Configuring Active Directory
+- Promoting Windows Server to a **Domain Controller (AD DS)**  
+- Creating a **lab.local** (or similar) domain  
+- Joining both Windows 8.1 clients to the domain  
+- Configuring **Group Policy, IAM roles, and permissions**  
+- Using Kali to scan and test services (e.g. Nmap, Metasploit)  
+- Using Metasploitable as the vulnerable target  
+- Capturing lab traffic with **Wireshark**
 
-Setting up DHCP + DNS roles
+---
 
-Domain-joining both Windows 8 VMs
+## ✅ Summary
 
-Running penetration tests from Kali to Metasploitable
+This repository documents the full **VirtualBox-based lab environment setup** using:
 
-Capturing traffic with Wiresharknm
+- Oracle VirtualBox  
+- Windows Server 2022  
+- Two Windows 8.1 client machines  
+- Early steps toward a security testing lab
+
+All screenshots in this README are actual captures from the build process and are stored in this repo as `Screenshot (X).png`.
