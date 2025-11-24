@@ -5,7 +5,7 @@
 - **Windows 8.1 Client VM #2**
 - (Kali Linux & Metasploitable are mentioned briefly where screenshots exist)
 
-All screenshots below are files stored in this repository (e.g. `Screenshot (1).png`, `Screenshot (30).png`, etc.).
+
 
 ---
 
