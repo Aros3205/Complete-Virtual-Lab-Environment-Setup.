@@ -292,3 +292,6 @@ Every major step is backed by screenshots taken directly from my setup process s
 
 > 💬 Feedback, issues, or suggestions?  
 > Open an **Issue** on this repo or reach out to me on LinkedIn.
+>
+> Linkedin : www.linkedin.com/in/tolulope-richard-arowobusoye-1a796634a
+> Email: tolu.aros3205@gmail.com
